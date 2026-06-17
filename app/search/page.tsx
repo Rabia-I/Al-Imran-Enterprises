@@ -4,6 +4,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { searchSite } from "@/lib/search/search";
 import { pageMetadata } from "@/lib/seo/meta";
 
+export const runtime = 'edge';
 export const metadata = pageMetadata({
   title: "Search Industrial Parts",
   description: "Search by brand, part number, model number, product name or industry.",
