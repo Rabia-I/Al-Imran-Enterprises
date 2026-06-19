@@ -7,7 +7,9 @@ import { PageHero } from "@/components/ui/PageHero";
 import { parts } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo/meta";
 import { breadcrumbSchema, productSchema } from "@/lib/schema/jsonld";
-export const runtime = 'edge';
+
+
+
 export function generateStaticParams() {
   return parts.map((part) => ({ partNumber: part.slug }));
 }

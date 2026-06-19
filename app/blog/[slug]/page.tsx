@@ -7,7 +7,6 @@ import { blogPosts } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo/meta";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema/jsonld";
 
-export const runtime = 'edge';
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }

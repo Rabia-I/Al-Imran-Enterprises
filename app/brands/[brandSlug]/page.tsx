@@ -8,7 +8,8 @@ import { PageHero } from "@/components/ui/PageHero";
 import { brands } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo/meta";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema/jsonld";
-export const runtime = 'edge';
+
+
 export function generateStaticParams() {
   return brands.map((brand) => ({ brandSlug: brand.slug }));
 }

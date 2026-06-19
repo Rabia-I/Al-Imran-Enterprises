@@ -7,7 +7,9 @@ import { PageHero } from "@/components/ui/PageHero";
 import { industries } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo/meta";
 import { breadcrumbSchema } from "@/lib/schema/jsonld";
-export const runtime = 'edge';
+
+
+
 export function generateStaticParams() {
   return industries.map((industry) => ({ industrySlug: industry.slug }));
 }
