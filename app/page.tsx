@@ -41,8 +41,8 @@ export default function HomePage() {
           <div className="grid content-start gap-4">
             {[
               { icon: ShieldCheck, title: "Original genuine parts", text: "Built around trusted sourcing for high-value industrial machinery." },
-              { icon: Factory, title: "Sugar mill strength", text: "Refine centrifugal machines and mill automation are major revenue drivers." },
-              { icon: Search, title: "Search-first SEO", text: "Pages map brand names, model numbers and part numbers to quote requests." }
+              { icon: Factory, title: "Sugar mill strength", text: "Trusted supplier of genuine refine centrifugal machine parts, PLCs, sensors and industrial controls for sugar mills." },
+              { icon: Search, title: "Fast sourcing", text: "Find the right industrial parts faster with searchable brands, models or part numbers." }
             ].map((item) => (
               <div className="rounded-lg border border-white/15 bg-white/10 p-5" key={item.title}>
                 <item.icon className="h-7 w-7 text-orange-300" />
