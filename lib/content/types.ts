@@ -17,6 +17,7 @@ export type Brand = {
 export type Product = {
   slug: string;
   name: string;
+  category: string;
   description: string;
   applications: string[];
   industries: string[];

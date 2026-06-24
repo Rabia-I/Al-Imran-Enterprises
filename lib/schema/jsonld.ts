@@ -7,6 +7,7 @@ export function organizationSchema() {
     "@type": "Organization",
     name: site.name,
     url: site.url,
+    logo: absoluteUrl("/brand/logo-mark.png"),
     email: site.email,
     telephone: site.phone,
     address: {

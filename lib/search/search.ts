@@ -33,7 +33,7 @@ export function searchSite(query: string): SearchResult[] {
       title: product.name,
       description: product.description,
       href: `/products/${product.slug}`,
-      score: scoreText(query, [product.name, product.slug, product.description, ...product.brands, ...product.applications])
+      score: scoreText(query, [product.name, product.slug, product.category, product.description, ...product.brands, ...product.applications])
     })),
     ...brands.map((brand) => ({
       type: "brand" as const,

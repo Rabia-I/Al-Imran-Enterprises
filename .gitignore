@@ -5,3 +5,6 @@ node_modules
 dist
 out
 tsconfig.tsbuildinfo
+public/brand/alimranenterpriseslogo.pdf
+public/brand/logo-render.png
+public/brand/logo-source.jpg
