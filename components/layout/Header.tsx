@@ -36,7 +36,7 @@ export function Header() {
   const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <header className={`sticky top-0 border-b border-slate-200 bg-white/95 backdrop-blur ${isMobileMenuOpen ? "z-50" : "z-40"}`}>
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
         <Link href="/" className="flex shrink-0 items-center gap-3">
           <Image
