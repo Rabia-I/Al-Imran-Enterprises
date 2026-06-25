@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
-import { site } from "@/lib/content";
+import { Resend } from "resend";
 
 export const runtime = "edge";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const TARGET_EMAILS = ["aiepk@gmail.com", "irabia573@gmail.com"];
@@ -77,40 +79,43 @@ export async function POST(request: Request) {
     // LOGGING
     console.info("quote.lead.processed", JSON.stringify(lead));
 
-    // EMAIL DELIVERY IMPLEMENTATION via MailChannels
+    // Prepare attachments
+    const attachments = [];
+    if (file instanceof File) {
+      const buffer = await file.arrayBuffer();
+      attachments.push({
+        filename: file.name,
+        content: Buffer.from(buffer),
+      });
+    }
+
+    // EMAIL DELIVERY via Resend
     try {
-      const emailResponse = await fetch("https://api.mailchannels.net/tx/v1/send", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          personalizations: [{ to: TARGET_EMAILS.map(email => ({ email })) }],
-          from: { email: "no-reply@alimranenterprises.com", name: "Al Imran Enterprises" },
-          subject: `New Quote Request from ${name}`,
-          content: [{
-            type: "text/plain",
-            value: `
-              New Quote Request Details:
-              --------------------------
-              Name: ${name}
-              Phone: ${phone}
-              Email: ${email}
-              City: ${city}
+      const { data: resendData, error: resendError } = await resend.emails.send({
+        from: "Al Imran Enterprises <onboarding@resend.dev>",
+        to: TARGET_EMAILS,
+        subject: `New Quote Request from ${name}`,
+        text: `
+          New Quote Request Details:
+          --------------------------
+          Name: ${name}
+          Phone: ${phone}
+          Email: ${email}
+          City: ${city}
 
-              Message:
-              ${message}
+          Message:
+          ${message}
 
-              Supporting File: ${file instanceof File ? file.name : "None"}
-              Received At: ${lead.receivedAt}
-            `
-          }]
-        })
+          Supporting File: ${file instanceof File ? file.name : "None"}
+          Received At: ${lead.receivedAt}
+        `,
+        attachments: attachments.length > 0 ? attachments : undefined,
       });
 
-      if (!emailResponse.ok) {
-        const errorText = await emailResponse.text();
-        console.error("quote.email_delivery_failed", errorText);
+      if (resendError) {
+        console.error("quote.email_delivery_failed", resendError);
       } else {
-        console.info("quote.email_delivered_successfully");
+        console.info("quote.email_delivered_successfully", resendData);
       }
     } catch (e) {
       console.error("quote.email_exception", e);
