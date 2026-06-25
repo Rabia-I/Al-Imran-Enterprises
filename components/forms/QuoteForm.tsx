@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Send } from "lucide-react";
+import Script from "next/script";
 
 export function QuoteForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAAAx7Y8-hY6E-P6G-"; // Default to testing key if not provided
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -44,7 +47,20 @@ export function QuoteForm() {
         <input id="website_url" name="website_url" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <input type="hidden" name="cf-turnstile-response" value="" />
+      <div className="mt-4">
+        <div
+          ref={turnstileRef}
+          className="cf-turnstile"
+          data-sitekey={siteKey}
+          data-callback="onTurnstileSuccess"
+        ></div>
+      </div>
+
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        strategy="afterInteractive"
+      />
+
       <button disabled={status === "loading"} className="mt-6 inline-flex items-center gap-2 rounded bg-signal px-5 py-3 font-bold text-white hover:bg-orange-600 disabled:opacity-60">
         <Send className="h-4 w-4" />
         {status === "loading" ? "Sending..." : "Submit Quote Request"}
