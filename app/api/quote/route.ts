@@ -92,7 +92,7 @@ export async function POST(request: Request) {
     // EMAIL DELIVERY via Resend
     try {
       const { data: resendData, error: resendError } = await resend.emails.send({
-        from: "Al Imran Enterprises <onboarding@resend.dev>",
+        from: "Al Imran Enterprises <info@alimranenterprises.com>",
         to: TARGET_EMAILS,
         subject: `New Quote Request from ${name}`,
         text: `
