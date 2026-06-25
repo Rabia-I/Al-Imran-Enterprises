@@ -119,7 +119,7 @@ export function Header() {
 
       {/* Mobile Menu Content */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 top-[61px] z-50 overflow-y-auto bg-white lg:hidden">
+        <div className="fixed left-0 right-0 bottom-0 top-[61px] z-50 overflow-y-auto bg-white lg:hidden">
           <nav className="flex flex-col p-4">
             <form action="/search" className="mb-4 flex items-center gap-2 rounded border border-slate-300 bg-white px-3 py-2">
               <Search className="h-4 w-4 text-slate-500" aria-hidden="true" />
