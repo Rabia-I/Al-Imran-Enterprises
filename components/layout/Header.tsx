@@ -4,9 +4,23 @@ import { Search } from "lucide-react";
 import { brands, industries, productCategories, products, services, site } from "@/lib/content";
 
 const navGroups = [
-  { label: "Brands", href: "/brands", items: brands.slice(0, 8).map((item) => ({ label: item.name, href: `/brands/${item.slug}` })) },
-  { label: "Industries", href: "/industries", items: industries.map((item) => ({ label: item.name, href: `/industries/${item.slug}` })) },
-  { label: "Services", href: "/services", items: services.map((item) => ({ label: item.name, href: `/services/${item.slug}` })) }
+  {
+    label: "Brands",
+    href: "/brands",
+    columns: 3,
+    width: "w-[640px]",
+    items: brands.map((item) => ({ label: item.name, href: `/brands/${item.slug}` }))
+  },
+  {
+    label: "Industries",
+    href: "/industries",
+    items: industries.map((item) => ({ label: item.name, href: `/industries/${item.slug}` }))
+  },
+  {
+    label: "Services",
+    href: "/services",
+    items: services.map((item) => ({ label: item.name, href: `/services/${item.slug}` }))
+  }
 ];
 
 const productMenu = productCategories.map((category) => ({
@@ -61,12 +75,14 @@ export function Header() {
               <Link className="rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100" href={group.href}>
                 {group.label}
               </Link>
-              <div className="invisible absolute left-0 top-full w-72 translate-y-2 border border-slate-200 bg-white p-2 opacity-0 shadow-industrial transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                {group.items.map((item) => (
-                  <Link className="block rounded px-3 py-2 text-sm text-slate-700 hover:bg-orange-50 hover:text-navy" href={item.href} key={item.href}>
-                    {item.label}
-                  </Link>
-                ))}
+              <div className={`invisible absolute left-0 top-full ${group.width || "w-72"} translate-y-2 border border-slate-200 bg-white p-2 opacity-0 shadow-industrial transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100`}>
+                <div className={`grid gap-x-2 ${group.columns === 3 ? "grid-cols-3" : "grid-cols-1"}`}>
+                  {group.items.map((item) => (
+                    <Link className="block rounded px-3 py-1.5 text-xs text-slate-700 hover:bg-orange-50 hover:text-navy" href={item.href} key={item.href}>
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           ))}

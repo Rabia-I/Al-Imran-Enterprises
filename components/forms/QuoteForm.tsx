@@ -22,10 +22,10 @@ export function QuoteForm() {
   return (
     <form onSubmit={onSubmit} className="rounded-lg border border-slate-200 bg-white p-6 shadow-industrial">
       <div className="grid gap-4 md:grid-cols-2">
-        <Field name="name" label="Name" required />
-        <Field name="phone" label="Contact Number" required />
-        <Field name="email" label="Email" type="email" required />
-        <Field name="city" label="City" required />
+        <Field name="name" label="Name" required minLength={2} maxLength={100} />
+        <Field name="phone" label="Contact Number" required minLength={7} maxLength={20} />
+        <Field name="email" label="Email" type="email" required maxLength={100} />
+        <Field name="city" label="City" required minLength={2} maxLength={50} />
       </div>
       <label className="mt-4 block">
         <span className="text-sm font-bold text-navy">Description</span>
@@ -35,6 +35,13 @@ export function QuoteForm() {
         <span className="text-sm font-bold text-navy">Supporting Documents</span>
         <input name="supportingDocuments" type="file" accept="image/*,.pdf" className="mt-2 w-full rounded border border-slate-300 px-3 py-2 text-sm" />
       </label>
+
+      {/* Honeypot field */}
+      <div className="sr-only" aria-hidden="true">
+        <label htmlFor="website_url">Website URL</label>
+        <input id="website_url" name="website_url" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <input type="hidden" name="cf-turnstile-response" value="" />
       <button disabled={status === "loading"} className="mt-6 inline-flex items-center gap-2 rounded bg-signal px-5 py-3 font-bold text-white hover:bg-orange-600 disabled:opacity-60">
         <Send className="h-4 w-4" />
@@ -46,11 +53,11 @@ export function QuoteForm() {
   );
 }
 
-function Field({ name, label, type = "text", required = false }: { name: string; label: string; type?: string; required?: boolean }) {
+function Field({ name, label, type = "text", required = false, minLength, maxLength }: { name: string; label: string; type?: string; required?: boolean; minLength?: number; maxLength?: number }) {
   return (
     <label className="block">
       <span className="text-sm font-bold text-navy">{label}</span>
-      <input name={name} type={type} required={required} className="mt-2 w-full rounded border border-slate-300 px-3 py-2" />
+      <input name={name} type={type} required={required} minLength={minLength} maxLength={maxLength} className="mt-2 w-full rounded border border-slate-300 px-3 py-2" />
     </label>
   );
 }
