@@ -3,7 +3,13 @@ import { Resend } from "resend";
 
 export const runtime = "edge";
 
-const resend = new Resend(process.env.RESEND_API_KEY || "dummy_key");
+let resendInstance: Resend | null = null;
+function getResend() {
+  if (!resendInstance) {
+    resendInstance = new Resend(process.env.RESEND_API_KEY || "re_dummy");
+  }
+  return resendInstance;
+}
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const TARGET_EMAILS = ["aiepk@gmail.com", "irabia573@gmail.com"];
@@ -100,6 +106,7 @@ export async function POST(request: Request) {
 
     // EMAIL DELIVERY via Resend
     try {
+      const resend = getResend();
       const { data: resendData, error: resendError } = await resend.emails.send({
         from: "Al Imran Enterprises <onboarding@resend.dev>",
         to: TARGET_EMAILS,
