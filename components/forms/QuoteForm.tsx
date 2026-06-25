@@ -22,10 +22,12 @@ export function QuoteForm() {
   return (
     <form onSubmit={onSubmit} className="rounded-lg border border-slate-200 bg-white p-6 shadow-industrial">
       <div className="grid gap-4 md:grid-cols-2">
-        <Field name="name" label="Name" required minLength={2} maxLength={100} />
+        <Field name="name" label="Contact Name" required minLength={2} maxLength={100} />
+        <Field name="company" label="Company Name" required minLength={2} maxLength={100} />
         <Field name="phone" label="Contact Number" required minLength={7} maxLength={20} />
         <Field name="email" label="Email" type="email" required maxLength={100} />
         <Field name="city" label="City" required minLength={2} maxLength={50} />
+        <Field name="address" label="Company Address" required minLength={5} maxLength={200} />
       </div>
       <label className="mt-4 block">
         <span className="text-sm font-bold text-navy">Description</span>
