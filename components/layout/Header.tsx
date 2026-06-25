@@ -1,6 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search } from "lucide-react";
+import { Search, Menu, X, ChevronDown } from "lucide-react";
 import { brands, industries, productCategories, products, services, site } from "@/lib/content";
 
 const navGroups = [
@@ -29,6 +32,9 @@ const productMenu = productCategories.map((category) => ({
 }));
 
 export function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
+
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
@@ -46,6 +52,8 @@ export function Header() {
             <span className="block text-xs font-semibold text-steel">Industrial parts Pakistan</span>
           </span>
         </Link>
+
+        {/* Desktop Navigation */}
         <nav className="hidden flex-1 items-center justify-center gap-1 lg:flex">
           <div className="group relative">
             <Link className="rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100" href="/products">
@@ -89,12 +97,118 @@ export function Header() {
           <Link className="rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100" href="/parts">Parts</Link>
           <Link className="rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100" href="/blog">Blog</Link>
         </nav>
+
         <form action="/search" className="hidden min-w-64 items-center gap-2 rounded border border-slate-300 bg-white px-3 py-2 md:flex">
           <Search className="h-4 w-4 text-slate-500" aria-hidden="true" />
           <input name="q" placeholder="Brand, model or part number" className="w-full text-sm outline-none" />
         </form>
-        <Link className="rounded bg-signal px-4 py-2 text-sm font-bold text-white hover:bg-orange-600" href="/quote">Get Quote</Link>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <Link className="hidden rounded bg-signal px-4 py-2 text-sm font-bold text-white hover:bg-orange-600 sm:block" href="/quote">Get Quote</Link>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="rounded p-2 text-slate-700 hover:bg-slate-100 lg:hidden"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu Content */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 top-[61px] z-50 overflow-y-auto bg-white lg:hidden">
+          <nav className="flex flex-col p-4">
+            <form action="/search" className="mb-4 flex items-center gap-2 rounded border border-slate-300 bg-white px-3 py-2">
+              <Search className="h-4 w-4 text-slate-500" aria-hidden="true" />
+              <input name="q" placeholder="Search brands or parts" className="w-full text-sm outline-none" />
+            </form>
+
+            <div className="flex flex-col gap-1">
+              {/* Products Accordion */}
+              <button
+                className="flex items-center justify-between rounded px-3 py-3 text-base font-bold text-navy hover:bg-slate-50"
+                onClick={() => setActiveAccordion(activeAccordion === 'products' ? null : 'products')}
+              >
+                Products
+                <ChevronDown className={`h-4 w-4 transition-transform ${activeAccordion === 'products' ? 'rotate-180' : ''}`} />
+              </button>
+              {activeAccordion === 'products' && (
+                <div className="ml-4 border-l-2 border-slate-100 pl-4 py-2">
+                  {productMenu.map((group) => (
+                    <div key={group.category} className="mb-4 last:mb-0">
+                      <div className="text-xs font-black uppercase tracking-wider text-slate-400 mb-2">{group.category}</div>
+                      <div className="grid gap-2">
+                        {group.items.map((item) => (
+                          <Link
+                            key={item.slug}
+                            href={`/products/${item.slug}`}
+                            className="text-sm text-slate-700 hover:text-signal"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Brands, Industries, Services Accordions */}
+              {navGroups.map((group) => (
+                <div key={group.label}>
+                  <button
+                    className="flex w-full items-center justify-between rounded px-3 py-3 text-base font-bold text-navy hover:bg-slate-50"
+                    onClick={() => setActiveAccordion(activeAccordion === group.label ? null : group.label)}
+                  >
+                    {group.label}
+                    <ChevronDown className={`h-4 w-4 transition-transform ${activeAccordion === group.label ? 'rotate-180' : ''}`} />
+                  </button>
+                  {activeAccordion === group.label && (
+                    <div className="ml-4 border-l-2 border-slate-100 pl-4 py-2 grid grid-cols-2 gap-2">
+                      {group.items.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="text-sm text-slate-700 hover:text-signal py-1"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              <Link
+                className="rounded px-3 py-3 text-base font-bold text-navy hover:bg-slate-50"
+                href="/parts"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Parts
+              </Link>
+              <Link
+                className="rounded px-3 py-3 text-base font-bold text-navy hover:bg-slate-50"
+                href="/blog"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
+                className="mt-4 rounded bg-signal px-4 py-3 text-center text-base font-bold text-white hover:bg-orange-600"
+                href="/quote"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Get a Quote
+              </Link>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

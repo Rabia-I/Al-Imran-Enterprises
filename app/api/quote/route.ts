@@ -3,7 +3,9 @@ import { Resend } from "resend";
 
 //export const runtime = "edge";
 
+
 const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder_key");
+
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const TARGET_EMAILS = ["aiepk@gmail.com", "irabia573@gmail.com"];
@@ -27,6 +29,11 @@ function sanitize(str: string) {
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error("Missing RESEND_API_KEY");
+      return NextResponse.json({ error: "Email service configuration missing" }, { status: 500 });
+    }
+
     const form = await request.formData();
 
     // Honeypot validation
@@ -36,9 +43,11 @@ export async function POST(request: Request) {
     }
 
     const name = sanitize(String(form.get("name") || ""));
+    const company = sanitize(String(form.get("company") || ""));
     const phone = sanitize(String(form.get("phone") || ""));
     const email = sanitize(String(form.get("email") || ""));
     const city = sanitize(String(form.get("city") || ""));
+    const address = sanitize(String(form.get("address") || ""));
     const message = sanitize(String(form.get("message") || ""));
     const token = String(form.get("cf-turnstile-response") || "");
     const file = form.get("supportingDocuments");
@@ -65,9 +74,11 @@ export async function POST(request: Request) {
 
     const lead = {
       name,
+      company,
       phone,
       email,
       city,
+      address,
       message,
       fileName: file instanceof File ? file.name : null,
       fileType: file instanceof File ? file.type : null,
@@ -94,14 +105,16 @@ export async function POST(request: Request) {
       const { data: resendData, error: resendError } = await resend.emails.send({
         from: "Al Imran Enterprises <info@alimranenterprises.com>",
         to: TARGET_EMAILS,
-        subject: `New Quote Request from ${name}`,
+        subject: `New Quote Request from ${name} (${company})`,
         text: `
           New Quote Request Details:
           --------------------------
           Name: ${name}
+          Company: ${company}
           Phone: ${phone}
           Email: ${email}
           City: ${city}
+          Address: ${address}
 
           Message:
           ${message}
