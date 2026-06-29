@@ -504,5 +504,105 @@ export const brands: Brand[] = [
     industries: ["textile-mills"],
     services: ["imported-machine-parts"],
     faqs: [{ question: "Can you source Delta VFDs?", answer: "Yes, we source Delta Electronics automation components." }]
+  },
+  {
+    slug: "beckhoff-pakistan",
+    name: "Beckhoff",
+    headline: "Beckhoff New Automation Technology in Pakistan",
+    description: "Beckhoff PC-based control technology, EtherCAT and industrial PCs.",
+    products: ["plc", "io-modules", "hmis"],
+    industries: ["industrial-automation", "manufacturing-plants"],
+    services: ["imported-machine-parts"],
+    faqs: [{ question: "Do you source Beckhoff EtherCAT modules?", answer: "Yes, we source Beckhoff automation components and I/O modules." }]
+  },
+  {
+    slug: "lenze-pakistan",
+    name: "Lenze",
+    headline: "Lenze Drive and Automation Systems in Pakistan",
+    description: "Lenze frequency inverters, servo drives and motion control solutions.",
+    products: ["vfds", "servo-systems"],
+    industries: ["textile-mills", "manufacturing-plants"],
+    services: ["imported-machine-parts"],
+    faqs: [{ question: "Can you source Lenze VFD spare parts?", answer: "Yes, we handle sourcing for Lenze drives and motion control products." }]
+  },
+  {
+    slug: "mean-well-pakistan",
+    name: "Mean Well",
+    headline: "Mean Well Power Supplies in Pakistan",
+    description: "Mean Well switching power supplies, DIN rail power and LED drivers.",
+    products: ["power-supplies"],
+    industries: ["industrial-automation", "manufacturing-plants"],
+    services: ["emergency-procurement"],
+    faqs: [{ question: "Do you source Mean Well DIN rail power supplies?", answer: "Yes, we source Mean Well power solutions for industrial panels." }]
+  },
+  {
+    slug: "festo-pakistan",
+    name: "Festo",
+    headline: "Festo Pneumatics and Automation in Pakistan",
+    description: "Festo pneumatic cylinders, valves and air preparation equipment.",
+    products: ["pneumatic-cylinders", "valves", "sensors"],
+    industries: ["manufacturing-plants", "food-processing", "pharmaceutical-plants"],
+    services: ["imported-machine-parts"],
+    faqs: [{ question: "Can you source Festo solenoid valves?", answer: "Yes, we source Festo pneumatic and automation components." }]
+  },
+  {
+    slug: "smc-pakistan",
+    name: "SMC",
+    headline: "SMC Pneumatics and Fluid Control in Pakistan",
+    description: "SMC pneumatic cylinders, actuators and directional control valves.",
+    products: ["pneumatic-cylinders", "valves", "actuators"],
+    industries: ["manufacturing-plants", "food-processing", "pharmaceutical-plants"],
+    services: ["imported-machine-parts"],
+    faqs: [{ question: "Do you source SMC air preparation units?", answer: "Yes, we provide SMC pneumatic and fluid control parts." }]
+  },
+  {
+    slug: "panasonic-pakistan",
+    name: "Panasonic",
+    headline: "Panasonic Industrial Automation in Pakistan",
+    description: "Panasonic PLCs, sensors, servo motors and laser markers.",
+    products: ["plc", "sensors", "servo-systems"],
+    industries: ["industrial-automation", "manufacturing-plants"],
+    services: ["imported-machine-parts"],
+    faqs: [{ question: "Can you source Panasonic servo drives?", answer: "Yes, we source Panasonic industrial automation components." }]
+  },
+  {
+    slug: "ebmpapst-pakistan",
+    name: "ebm-papst",
+    headline: "ebm-papst Fans and Motors in Pakistan",
+    description: "ebm-papst industrial fans, blowers and motors for cooling and ventilation.",
+    products: ["fans", "motors"],
+    industries: ["manufacturing-plants", "food-processing"],
+    services: ["emergency-procurement"],
+    faqs: [{ question: "Do you source ebm-papst cooling fans?", answer: "Yes, we source ebm-papst fans for industrial equipment cooling." }]
+  },
+  {
+    slug: "wago-pakistan",
+    name: "WAGO",
+    headline: "WAGO Connection and Automation in Pakistan",
+    description: "WAGO terminal blocks, connectors and I/O systems for industrial wiring.",
+    products: ["terminal-blocks", "io-modules", "connectors"],
+    industries: ["industrial-automation", "manufacturing-plants"],
+    services: ["panel-builder-supply"],
+    faqs: [{ question: "Can you source WAGO 750 series I/O?", answer: "Yes, we source WAGO connection and automation components." }]
+  },
+  {
+    slug: "weidmuller-pakistan",
+    name: "Weidmüller",
+    headline: "Weidmüller Industrial Connectivity in Pakistan",
+    description: "Weidmüller terminal blocks, power supplies and industrial Ethernet solutions.",
+    products: ["terminal-blocks", "power-supplies", "connectors"],
+    industries: ["industrial-automation", "manufacturing-plants"],
+    services: ["panel-builder-supply"],
+    faqs: [{ question: "Do you source Weidmüller power supplies?", answer: "Yes, we source Weidmüller industrial connectivity products." }]
+  },
+  {
+    slug: "hitachi-pakistan",
+    name: "Hitachi",
+    headline: "Hitachi Industrial Equipment in Pakistan",
+    description: "Hitachi inverters, PLCs and industrial motors for process automation.",
+    products: ["vfds", "plc", "motors"],
+    industries: ["manufacturing-plants", "cement-plants"],
+    services: ["imported-machine-parts"],
+    faqs: [{ question: "Can you source Hitachi inverters?", answer: "Yes, we source Hitachi industrial automation and drive components." }]
   }
 ];

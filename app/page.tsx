@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Factory, ShieldCheck, Search } from "lucide-react";
 import { CardGrid } from "@/components/ui/CardGrid";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -53,6 +54,23 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <section className="border-b border-slate-100 bg-white py-12">
+        <div className="mx-auto max-w-7xl px-4">
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-slate-400">Trusted supplier for global industrial brands</p>
+          <div className="mt-8 flex justify-center">
+            <Image
+              src="/brand/supplier-logos.jpg"
+              alt="Global industrial brands supplied by Al Imran Enterprises: Siemens, Omron, ABB, Rockwell Automation, Sick, Beckhoff, Eaton, Lenze, IFM, Pilz, Mitsubishi, Keyence, Schneider, Danfoss, Fluke, Fuji, Mean Well, Pepperl+Fuchs, Festo, SMC, Yaskawa, Honeywell, Panasonic, ebm-papst, Phoenix Contact"
+              width={1000}
+              height={200}
+              className="h-auto w-full max-w-4xl opacity-80 transition-opacity hover:opacity-100"
+              priority
+            />
+          </div>
+          <p className="mt-8 text-center text-sm text-slate-500">Genuine parts sourced directly from leading manufacturers.</p>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-7xl px-4 py-12">
         <h2 className="text-3xl font-black text-navy">High-intent industrial pages</h2>
         <p className="mt-3 max-w-3xl text-slate-600">Every page is built to answer brand, model, industry and part-number searches for Pakistan-based sourcing.</p>

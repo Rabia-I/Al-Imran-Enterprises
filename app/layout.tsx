@@ -28,7 +28,13 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     title: site.name,
-    capable: true
+    capable: true,
+    statusBarStyle: "default"
+  },
+  manifest: "/site.webmanifest",
+  other: {
+    "msapplication-TileColor": "#0b2341",
+    "theme-color": "#0b2341"
   }
 };
 
@@ -39,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Explicitly adding link tags for better indexability of favicon by Google */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/favicon-180x180.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body>
         <JsonLd data={organizationSchema()} />
